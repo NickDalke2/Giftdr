@@ -1,0 +1,23 @@
+<% if @products != nil %>
+  <div class="row">
+     <% @products.each do |product| %>
+       <div class="product col-xs-3 thumbnail">
+         <% if product['MediumImage'] %>
+         <div class='product-img'>
+           <%= link_to image_tag(product['MediumImage']['URL']), product['DetailPageURL']  %>
+           <% else %>
+           <img src="https://placehold.it/160?text=no+image" alt="" />
+           <% end %>
+         </div>
+         <div class="caption">
+           <p>
+             <%= link_to truncate(product['ItemAttributes']['Title'], length: 50), product['DetailPageURL'] if product['ItemAttributes']['Title'] %>
+           </p>
+           <h5>
+             <%#= link_to product['Offers']['Offer']['OfferListing']['Price']['FormattedPrice'], product['DetailPageURL'] if product['Offers']['Offer'] %>
+           </h5>
+         </div>
+       </div>
+     <% end %>
+   </div>
+<% end %>

@@ -1,0 +1,27 @@
+<% if params[:search] && params[:type] %>
+<nav class="text-center">
+  <ul class="pagination">
+    <li>
+      <% if params[:page].to_i == 1 %>
+        <%= link_to '<', person_path(@person.id, search:params[:search],type:params[:type],page:1) %>
+      <% else %>
+        <%= link_to '<', person_path(@person.id, search:params[:search],type:params[:type],page:params[:page].to_i - 1) %>
+      <% end %>
+    </li>
+    <% (1..5).each do |page| %>
+      <% if params[:page].to_i == page.to_i %>
+      <li class="active"><%= link_to page, person_path(@person.id, search:params[:search],type:params[:type],page:page) %></li>
+      <% else %>
+      <li><%= link_to page, person_path(@person.id, search:params[:search],type:params[:type],page:page) %></li>
+      <% end %>
+    <% end %>
+    <li>
+      <% if params[:page].to_i == 5 %>
+        <%= link_to '>', person_path(@person.id, search:params[:search],type:params[:type],page:5) %>
+      <% else %>
+        <%= link_to '>', person_path(@person.id, search:params[:search],type:params[:type],page:params[:page].to_i + 1) %>
+      <% end %>
+    </li>
+  </ul>
+</nav>
+<% end %>

@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="row text-center panel panel-body">
+    <% @person.reminders.each do |reminder| %>
+    <h1><%= @person.name.capitalize %>'s <%= reminder.reminder_type.event %> is on <%= reminder.when.strftime("%D") %></h1>
+    <% end %>
+    <%= render 'interest' %>
+  </div>
+  <%= render 'pagination' %>
+  <%= render 'product' %>
+
+</div>

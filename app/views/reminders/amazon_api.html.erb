@@ -1,0 +1,34 @@
+<div class="container">
+  <%= form_tag amazon_api_path, method: "get" do %>
+    <div class="form-group row search-wrapper">
+      <%= text_field_tag :search, nil, placeholder: 'search', class:'form-control search-bar' %>
+      <%= select_tag :type, options_for_select(@category) %>
+      <%= submit_tag "Search", class:'btn btn-primary search-btn' %>
+    </div>
+  <% end %>
+
+<% if @products != nil %>
+  <div class="row">
+     <% @products.each do |product| %>
+       <div class="product col-md-3 thumbnail">
+         <% if product['MediumImage'] %>
+         <%= link_to image_tag(product['MediumImage']['URL']), product['DetailPageURL']  %>
+         <% else %>
+         <img src="https://placehold.it/160?text=no+image" alt="" />
+         <% end %>
+         <div class="caption">
+           <p>
+             <%= link_to truncate(product['ItemAttributes']['Title']), truncate(product['DetailPageURL']) if product['ItemAttributes']['Title'] %>
+           </p>
+           <h5>
+             <%#= link_to product['Offers']['Offer']['OfferListing']['Price']['FormattedPrice'], product['DetailPageURL'] if product['Offers']['Offer'] %>
+           </h5>
+         </div>
+         <h4>
+
+         </h4>
+       </div>
+     <% end %>
+   </div>
+<% end %>
+</div>

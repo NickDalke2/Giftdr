@@ -1,0 +1,14 @@
+<div class='container persons-wrapper'>
+  <h4><%= link_to "reminders", reminders_path %> | <%= link_to "history", persons_path %></h4>
+  <% @reminders.each do |reminder| %>
+    <% if current_user.id == reminder.user_id && reminder.when.change(hour:0) < Time.now.change(hour:0) %>
+       <div class= "col-md-6 panel panel-body">
+          <h3><%= reminder.person.name.capitalize %></h3>
+          <h3><%= reminder.reminder_type.event %> (<%= reminder.when.strftime("%D") %>) <%= link_to 'Renew', reminders_path, class:"btn btn-success btn-sm" %></h3>
+          <% reminder.person.interests.each do |interest| %>
+          <h4><%= interest.name %></h4>
+          <% end %>
+       </div>
+    <% end %>
+  <% end %>
+</div>

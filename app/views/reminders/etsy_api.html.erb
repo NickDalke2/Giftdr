@@ -1,0 +1,21 @@
+div class="container">
+<%= form_tag etsy_api_path, method: "get" do %>
+    <%= text_field_tag :search, nil, placeholder: 'search' %>
+    <%= submit_tag "Search" %>
+<% end %>
+
+<% if @products != nil %>
+<h1>Products from the Etsy API</h1>
+     <% @products.each do |product| %>
+       <div class="product col-md-3 itembox">
+         <%= link_to image_tag(product['MediumImage']['URL']), product['DetailPageURL'] if product['MediumImage'] %>
+         <br>
+         <%= link_to product['ItemAttributes']['Title'], product['DetailPageURL'] if product['ItemAttributes']['Title'] %>
+         <br>
+         <%= link_to product['Offers']['Offer']['OfferListing']['Price']['FormattedPrice'], product['DetailPageURL'] if product['Offers']['Offer'] %>
+         <br>
+       </div>
+
+     <% end %>
+<% end %>
+</div>

@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="well well-sm">
+                <div class="row">
+                    <div class="col-sm-6 col-md-4">
+                        <%= image_tag @user.image_url %>
+                    </div>
+                    <div class="col-sm-6 col-md-8">
+                        <h4><%= @user.name %></h4>
+                        <p>
+                            <i class="glyphicon glyphicon-envelope"></i>Email: <%= @user.email %>
+                            <br />
+                            <i class="glyphicon glyphicon-phone"></i>Phone: <%= @user.phone %>
+                            <br />
+                            <i class="glyphicon glyphicon-globe"></i><%= link_to "Edit", edit_user_path(current_user.id) %>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

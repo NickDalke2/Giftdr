@@ -1,0 +1,35 @@
+<%= form_for @reminder do |r| %>
+  <%= fields_for @person do |rp| %>
+    <%= fields_for @reminder_type do |rrt| %>
+      <div class="form-group">
+        <%= rp.label :name, "Name" %>
+        <%= rp.text_field :name, class:'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= rrt.label :event, "Event" %>
+        <%= rrt.text_field :event, class:'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= r.label :when, "Date" %>
+        <%= r.text_field :when, class:'form-control', ampm:true, id:"datetimepicker" %>
+      </div>
+      <div class="form-group">
+        <%= r.label :send_text %>
+        <%= r.check_box :send_text %>
+        <%= r.label :send_email %>
+        <%= r.check_box :send_email %>
+      </div>
+      <div class="form-group">
+        <%= r.submit class:'btn btn-primary' %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+
+<script type="text/javascript">
+// jQuery('#datetimepicker').datetimepicker();
+jQuery('#datetimepicker').datetimepicker({
+ timepicker:false,
+ format:'d.m.Y'
+});
+</script>

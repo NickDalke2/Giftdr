@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Giftdr2</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <nav class="navbar navbar-custom snavbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <%= link_to 'Giftdr', root_path, class: 'navbar-brand' %>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <% if current_user %>
+          <ul class="nav navbar-nav">
+            <li><%= link_to current_user.name, reminders_path %></li>
+            <li><%= link_to 'Settings', user_path(current_user.id) %></li>
+            <li><%= link_to 'Log Out', logout_path, method: :delete %></li>
+          </ul>
+        <% else %>
+          <ul class="nav navbar-nav pull-right">
+            <li><%= link_to 'Facebook', '/auth/facebook' %></li>
+          </ul>
+        <% end %>
+      </div>
+    </div>
+  </nav>
+<% flash.each do |name, msg| %>
+  <%= content_tag :div, msg, class: "name alert alert-success container" %>
+<% end %>
+<%= yield %>
+</body>
+</html>

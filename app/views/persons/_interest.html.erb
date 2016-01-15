@@ -1,0 +1,37 @@
+<div class="row add-interest container">
+<%= form_for @person do |p| %>
+  <%= fields_for @interest do |i| %>
+  <div class="form-group">
+    <%= i.text_field :name, class:'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= i.submit 'Add Interest', class:'btn btn-primary' %>
+  </div>
+  <% end %>
+<% end %>
+</div>
+
+<div class='dropdown-wrapper row'>
+  <div class="dropdown dropdown-search">
+    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+      <h3>Interest: <%= params[:search].to_s.capitalize %></h3>
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+      <% @person.interests.each do |interest| %>
+      <li><%= link_to interest.name.capitalize, person_path(search:interest.name, type:params[:type] || "All", page:1) %></li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="dropdown dropdown-type">
+    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+      <h3>Category: <%= params[:type].to_s %></h3>
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+      <% @category.each do |c| %>
+      <li><%= link_to c, person_path(search:params[:search], type:c, page:1), class:"" %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>

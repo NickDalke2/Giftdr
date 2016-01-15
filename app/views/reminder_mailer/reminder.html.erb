@@ -1,0 +1,11 @@
+<h1>Giftdr Reminder</h1>
+
+<p>
+  <%= @greeting %>
+</p>
+<% @user.reminders.each do |r| %>
+  <% if r.when.change(hour:0) > Time.now.change(hour:0)  %>
+    <p><%= r.person.name.capitalize %> has a <%= r.reminder_type.event %> coming up on <%= r.when.strftime("%D") %></p>
+    <%= link_to "look for gift ideas!", "giftdr.herokuapp.com/persons/#{r.person.id}" %>
+  <% end %>
+<% end %>
